@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="form.css">
+        <title>Register</title>
+    </head>
+    <body>
 
-<form>
+        <form class="form">
+            <h4>Account type
+                <select>
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                </select>
+            </h4>
 
-    <h4>Account type
-        <select>
-            <option value="student">Student</option>
-            <option value="teacher">Teacher</option>
-        </select>
-    </h4>
+            <input type="email" name="email" placeholder="E-mail"><br>
+            <input type="password" name="password" placeholder="Password"><br>
+            <input type="password" name="password2" placeholder="Repeat password"><br>
+            <br>
+            <input type="submit" name="register" placeholder="Register">
 
-    <input type="email" name="email" placeholder="E-mail"></br>
-    <input type="password" name="password" placeholder="Password"></br>
-    <input type="password" name="password2" placeholder="Repeat password"></br>
-    <br>
-    <input type="submit" name="register" placeholder="Register">
-
-</form>
-
-
-</body>
+        </form>
+    </body>
 </html>
