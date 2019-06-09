@@ -1,7 +1,9 @@
 package nl.saxion.budgetblackboard.users;
 
 import nl.saxion.budgetblackboard.models.Subject;
+import sun.security.util.Password;
 
+import javax.validation.constraints.Email;
 import java.util.ArrayList;
 
 public class Student extends Person {

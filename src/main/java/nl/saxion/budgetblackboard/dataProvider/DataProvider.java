@@ -4,10 +4,15 @@ import nl.saxion.budgetblackboard.models.Course;
 import nl.saxion.budgetblackboard.models.Subject;
 import nl.saxion.budgetblackboard.models.Topic;
 import nl.saxion.budgetblackboard.users.Person;
+import nl.saxion.budgetblackboard.users.Student;
+import nl.saxion.budgetblackboard.users.Teacher;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+
+
 
 @Service
 public class DataProvider {
@@ -24,7 +29,8 @@ public class DataProvider {
 	}
 
 	private void init(){
-		//TODO: init method. fill all the dummy data here.
+		users.add(new Student("12345@student.saxion.nl", "123"));
+		users.add(new Teacher("54321@saxion.nl", "321"));
 	}
 
 	public ArrayList<Person> getUsers() {

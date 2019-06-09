@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="form.css">
+        <link th:href="@{/css/form.css}" rel="stylesheet" >
         <title>Login</title>
     </head>
     <body>
-
-        <form class="form">
-            <img src="Blackboard_Inc._logo.png" width="128" height="128" alt="logo"><br/>
+        <form class="form" method="post">
+            <img th:src="@{/images/logo.png}" width="128" height="128" alt="logo" ><br/>
             <input type="email" name="email" placeholder="E-mail"><br/>
             <input type="password" name="password" placeholder="Password"><br/>
             <br>
-            <input type="submit" name="login" value="Login"><br/>
-            <input type="button" name="register" value="Register"><br/>
+            <input type="submit" name="login" value="Login" ><br/>
+            <a th:href="register">Register</a>
         </form>
 
     </body>

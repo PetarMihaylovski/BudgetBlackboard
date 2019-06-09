@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="form.css">
+        <link th:href="@{/css/form.css}" rel="stylesheet" >
         <title>Register</title>
     </head>
     <body>
 
-        <form class="form">
+        <form class="form" method="post">
             <h4>Account type
-                <select>
-                    <option value="student">Student</option>
-                    <option value="teacher">Teacher</option>
+                <select name="account">
+                    <option th:value="student" >Student</option>
+                    <option th:value="teacher">Teacher</option>
                 </select>
             </h4>
 
