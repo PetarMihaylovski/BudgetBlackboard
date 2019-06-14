@@ -6,54 +6,62 @@ import nl.saxion.budgetblackboard.models.Topic;
 import nl.saxion.budgetblackboard.users.Person;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 @Service
 public class DataProvider {
-
+	private static DataProvider dataProvider;
 	private ArrayList<Person> users;
 	private ArrayList<Course> courses;
 	private HashMap<Subject, ArrayList<Topic>> subjectWithTopics;
+	private static boolean hasBeenInitialized = false;
 
-	public DataProvider() {
+	private DataProvider() {
 		this.users = new ArrayList<>();
 		this.courses = new ArrayList<>();
 		this.subjectWithTopics = new HashMap<>();
 		init();
 	}
 
-	private void init(){
-		//TODO: init method. fill all the dummy data here.
+	public static DataProvider getInstance() {
+		if (dataProvider == null) {
+			dataProvider = new DataProvider();
+		}
+		return dataProvider;
 	}
 
-	public ArrayList<Person> getUsers() {
-		return new ArrayList<>(this.users);
+	private void init() {
+		//TODO: fill all the dummy data here.
+		if (!hasBeenInitialized) {
+			addCourse(new Course("ICT", 5, 48, 4));
+			addCourse(new Course("Tourism management", 2, 51, 4));
+			hasBeenInitialized = true;
+		}
 	}
-
 	public ArrayList<Course> getCourses() {
 		return new ArrayList<>(this.courses);
 	}
 
-	public HashMap<Subject, ArrayList<Topic>> getSubjectWithTopics() {
-		return new HashMap<>(this.subjectWithTopics);
-	}
-
-	public void addUser(Person user) {
-		if (!this.users.contains(user)) {
-			this.users.add(user);
-		}
-	}
-
-	public void addCours(Course course) {
+	public boolean addCourse(Course course) {
 		if (!this.courses.contains(course)) {
 			this.courses.add(course);
+			return true;
 		}
+		return false;
 	}
 
-	//TODO: not tested, might give an error.
-	public void addTopic(Subject key, Topic topic) {
-		ArrayList<Topic> currTopics = this.subjectWithTopics.get(key);
-		currTopics.add(topic);
+	public Course findCourseByID(int ID){
+		for (Course course :this.courses) {
+			if (course.getID() == ID){
+				return course;
+			}
+		}
+		return null;
+	}
+
+	public void updateCourse(Course editedCourse, int ID) {
+		this.courses.set(ID-1, editedCourse);
 	}
 }

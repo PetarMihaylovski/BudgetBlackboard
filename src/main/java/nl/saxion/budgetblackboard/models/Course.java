@@ -1,34 +1,42 @@
 package nl.saxion.budgetblackboard.models;
 
-import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.*;
 
 public class Course extends Header {
+	@JsonProperty
 	private int minCreditsToPass;
+	@JsonProperty
 	private int duration;
-	private ArrayList<Subject> subjects;
+//	@JsonIgnore
+//	private ArrayList<Subject> subjects;
 
+	@JsonCreator
 	public Course(String name, int difficulty, int minCreditsToPass, int duration) {
 		super(name, difficulty);
 		this.minCreditsToPass = minCreditsToPass;
 		this.duration = duration;
-		this.subjects = new ArrayList<>();
+//		this.subjects = new ArrayList<>();
 	}
 
 	public int getMinCreditsToPass() {
 		return minCreditsToPass;
 	}
 
+	public void setMinCreditsToPass(int minCreditsToPass) {
+		this.minCreditsToPass = minCreditsToPass;
+	}
+
 	public int getDuration() {
 		return duration;
 	}
 
-	public void addSubject(Subject subject) {
-		if (!this.subjects.contains(subject)) {
-			this.subjects.add(subject);
-		}
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
 
-	public ArrayList<Subject> getSubjects() {
-		return new ArrayList<>(this.subjects);
+	@Override
+	public String toString() {
+		//TODO: create a nice toString method.
+		return "Course name: " + getName();
 	}
 }

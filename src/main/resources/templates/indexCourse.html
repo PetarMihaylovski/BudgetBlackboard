@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Courses</title>
+    <link rel="stylesheet" type="text/css" href="index-stylesheet.css">
+</head>
+<body>
+
+<div id="page">
+
+    <header th:insert="fragments/headerFragment.html :: header"></header>
+    <section class="main">
+        <!--The main table with all available courses-->
+        <table>
+            <tr>
+                <th>Course name</th>
+                <th>Difficulty</th>
+                <th>Minimum credits to pass</th>
+                <th>Duration (in years)</th>
+                <th>Options</th>
+            </tr>
+            <tr th:each="course :${courses}">
+                <td th:text="${course.name}"></td>
+                <td th:text="${course.difficulty}"></td>
+                <td th:text="${course.duration}"> </td>
+                <td th:text="${course.minCreditsToPass}"></td>
+                <td>
+                    <a th:href="@{/courses/edit/{ID} (ID=${course.ID})}">Edit course</a>
+                    <a th:href="@{/courses/edit/{ID} (ID=${course.ID})}">View subjects</a>
+                </td>
+            </tr>
+        </table>
+    </section>
+    <section>
+        <!--The available option buttons from which a person can choose-->
+        <aside>
+            <div class="content">
+                <h3><a href="/courses/add">Add a course</a></h3>
+                <p>When you click the link above, you will be able to <strong>add</strong> a new course to the already
+                    existing courses!</p>
+            </div>
+        </aside>
+    </section>
+    <footer th:insert="fragments/footerFragment.html :: footer"></footer>
+</div>
+</body>
+</html>
