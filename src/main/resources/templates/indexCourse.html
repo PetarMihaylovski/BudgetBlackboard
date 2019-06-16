@@ -4,7 +4,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Courses</title>
+    <title>Available courses</title>
     <link rel="stylesheet" type="text/css" href="index-stylesheet.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
             <tr>
                 <th>Course name</th>
                 <th>Difficulty</th>
-                <th>Minimum credits to pass</th>
+                <th>Available credits</th>
                 <th>Duration (in years)</th>
                 <th>Options</th>
             </tr>
@@ -29,7 +29,8 @@
                 <td th:text="${course.minCreditsToPass}"></td>
                 <td>
                     <a th:href="@{/courses/edit/{ID} (ID=${course.ID})}">Edit course</a>
-                    <a th:href="@{/courses/edit/{ID} (ID=${course.ID})}">View subjects</a>
+                    <a th:href="@{/courses/subjects/{ID} (ID=${course.ID})}">View subjects</a>
+                    <a th:href="@{/courses/delete/{ID} (ID=${course.ID})}">Delete course</a>
                 </td>
             </tr>
         </table>
@@ -44,7 +45,9 @@
             </div>
         </aside>
     </section>
-    <footer th:insert="fragments/footerFragment.html :: footer"></footer>
+
+
+    <footer th:insert="fragments/headerFragment.html :: footer"></footer>
 </div>
 </body>
 </html>

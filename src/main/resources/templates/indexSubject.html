@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="index-stylesheet.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Available subjects</title>
+</head>
+<body>
+<div id="page">
+    <header th:insert="fragments/headerFragment.html :: header"></header>
+    <section class="main">
+        <!--The main table with all available courses-->
+        <table>
+            <tr>
+                <th>Subject name</th>
+                <th>Difficulty</th>
+                <th>Credits</th>
+                <th>Duration (in weeks)</th>
+                <th>Options</th>
+            </tr>
+            <tr th:each="subject :${subjects}">
+                <td th:text="${subject.name}"></td>
+                <td th:text="${subject.difficulty}"></td>
+                <td th:text="${subject.credits}"></td>
+                <td th:text="${subject.duration}"></td>
+                <td>
+                    <a th:href="@{/courses/subjects/edit/{ID} (ID=${subject.ID})}">Edit subject</a>
+                    <a th:href="@{/subject (ID=${subject.ID})}">View topics</a>
+                    <a th:href="@{/courses/subject/delete/{ID} (ID=${subject.ID})}">Delete subject</a>
+                </td>
+            </tr>
+        </table>
+    </section>
+    <section>
+        <!--The available option buttons from which a person can choose-->
+        <aside>
+            <div class="content">
+                <h3><a href="/courses/subjects//add">Add a subject</a></h3>
+                <p>When you click the link above, you will be able to <strong>add</strong> a new subject to the already
+                    existing subjects in that course!</p>
+            </div>
+        </aside>
+    </section>
+    <footer th:insert="fragments/footerFragment.html :: footer"></footer>
+
+</div>
+
+</body>
+</html>

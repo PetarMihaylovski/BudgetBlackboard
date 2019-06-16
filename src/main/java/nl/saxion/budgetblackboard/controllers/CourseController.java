@@ -13,6 +13,7 @@ public class CourseController {
 
 	@GetMapping(path = "")
 	public String getCourses(Model model) {
+		System.out.println("im here from the delete method");
 		model.addAttribute("courses", this.data.getCourses());
 		return "indexCourse";
 	}
@@ -23,10 +24,10 @@ public class CourseController {
 	}
 
 	@PostMapping(path = "/add")
-	public String addCourse(Course course, Model model){
+	public String addCourse(Course course, Model model) {
 		this.data.addCourse(course);
 		model.addAttribute("courses", this.data.getCourses());
-		return "indexCourse";
+		return "redirect:/courses";
 	}
 
 	@GetMapping(path = "/edit/{id}")
@@ -40,13 +41,18 @@ public class CourseController {
 	public String editCourse(Course course, @PathVariable int id, Model model) {
 		this.data.updateCourse(course, id);
 		model.addAttribute("courses", this.data.getCourses());
-		return "indexCourse";
+		return "redirect:/courses";
 	}
 
-	@GetMapping(path = "/view/{ID}")
-	public String view(@PathVariable int ID, Model model){
+	@GetMapping(path = "/view")
+	public String viewSubject(@PathVariable int ID) {
 		Course course = this.data.findCourseByID(ID);
-		model.addAttribute("course", course);
-		return "";
+		return "redirect:/courses/subjects/" + course.getID();
+	}
+
+	@GetMapping(path = "/delete/{ID}")
+	public String deleteCourse(@PathVariable int ID) {
+		this.data.deleteCourse(ID);
+		return "redirect:/courses";
 	}
 }

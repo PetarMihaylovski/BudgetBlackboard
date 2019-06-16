@@ -1,21 +1,22 @@
 package nl.saxion.budgetblackboard.models;
 
-import com.fasterxml.jackson.annotation.*;
+
+import java.util.ArrayList;
 
 public class Course extends Header {
-	@JsonProperty
 	private int minCreditsToPass;
-	@JsonProperty
 	private int duration;
-//	@JsonIgnore
-//	private ArrayList<Subject> subjects;
+	private ArrayList<Subject> subjects;
+	private static int lastAssignedID = 0;
+	private int ID;
 
-	@JsonCreator
 	public Course(String name, int difficulty, int minCreditsToPass, int duration) {
 		super(name, difficulty);
 		this.minCreditsToPass = minCreditsToPass;
 		this.duration = duration;
-//		this.subjects = new ArrayList<>();
+		this.subjects = new ArrayList<>();
+		this.ID = lastAssignedID;
+		++lastAssignedID;
 	}
 
 	public int getMinCreditsToPass() {
@@ -30,8 +31,20 @@ public class Course extends Header {
 		return duration;
 	}
 
+	public int getID() {
+		return ID;
+	}
+
 	public void setDuration(int duration) {
 		this.duration = duration;
+	}
+
+	public ArrayList<Subject> getSubjects() {
+		return new ArrayList<>(this.subjects);
+	}
+
+	public void addSubject(Subject subject) {
+		this.subjects.add(subject);
 	}
 
 	@Override
