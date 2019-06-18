@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add subjects</title>
+</head>
+<body>
+<div>
+    <header th:insert="fragments/headerFragment.html :: header"></header>
+
+    <form th:action="@{/courses/subjects/add}" method="post">
+        Subject name:<br>
+        <label>
+            <input type="text" name="name" placeholder="Subject Name">
+        </label>
+        <br>
+        Difficulty:<br>
+        <label>
+            <input type="number" name="difficulty" placeholder="Subject difficulty">
+        </label>
+        <br>
+        Available credits<br>
+        <label>
+            <input type="number" name="credits" placeholder="Available credits">
+        </label>
+        <br>
+        Duration:<br>
+        <label>
+            <input type="number" name="duration" placeholder="The duration of the course">
+        </label>
+        <br>
+        <input type="submit" value="Add subject!">
+    </form>
+    <footer th:insert="fragments/footerFragment.html :: footer"></footer>
+</div>
+</body>
+</html>
