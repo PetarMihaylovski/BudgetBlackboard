@@ -8,7 +8,7 @@
 </head>
 <body>
 <div>
-    <header th:insert="fragments/headerFragment.html :: header"></header>
+    <header th:insert="fragments/fragment.html :: header"></header>
 
     <form th:action="@{/courses/{courseID}/subjects/add (courseID=${course.ID})}" method="post">
         Subject name:<br>
@@ -33,7 +33,7 @@
         <br>
         <input type="submit" value="Add subject!">
     </form>
-    <footer th:insert="fragments/footerFragment.html :: footer"></footer>
+    <footer th:insert="fragments/ragment.html :: footer"></footer>
 </div>
 </body>
 </html>

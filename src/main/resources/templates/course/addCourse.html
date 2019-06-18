@@ -9,7 +9,7 @@
 </head>
 <body>
 <div>
-    <header th:insert="fragments/headerFragment.html :: header"></header>
+    <header th:insert="fragments/fragment.html :: header"></header>
 
     <form th:action="@{/courses/add}" method="post">
         Course name:<br>
@@ -34,7 +34,7 @@
         <br>
         <input type="submit" value="Add course!">
     </form>
-    <footer th:insert="fragments/footerFragment.html :: footer"></footer>
+    <footer th:insert="fragments/fragment.html :: footer"></footer>
 </div>
 
 
