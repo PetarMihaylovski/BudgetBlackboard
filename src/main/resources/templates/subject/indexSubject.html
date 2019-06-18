@@ -26,9 +26,9 @@
                 <td th:text="${subject.credits}"></td>
                 <td th:text="${subject.duration}"></td>
                 <td>
-                    <a th:href="@{/courses/{courseID}/subjects/edit/{ID} (courseID=${course.ID}) (ID=${subject.ID})}">Edit subject</a>
-                    <a th:href="@{/subject (ID=${subject.ID})}">View topics</a>
-                    <a th:href="@{/courses/{courseID}/subjects/delete/{ID} (courseID=${course.ID}) (ID=${subject.ID})}">Delete subject</a>
+                    <a th:href="@{/courses/{courseID}/subjects/edit/{ID} (courseID=${course.ID}, ID=${subject.ID})}">Edit subject</a>
+                    <a th:href="@{/templates/subject (ID=${subject.ID})}">View topics</a>
+                    <a th:href="@{/courses/{courseID}/subjects/delete/{ID} (courseID=${course.ID}, ID=${subject.ID})}">Delete subject</a>
                 </td>
             </tr>
         </table>
@@ -37,7 +37,7 @@
         <!--The available option buttons from which a person can choose-->
         <aside>
             <div class="content">
-                <h3><a href="/courses/{courseID}/subjects/add">Add a subject</a></h3>
+                <h3><a th:href="@{/courses/{courseID}/subjects/add (courseID=${course.ID})}">Add a subject</a></h3>
                 <p>When you click the link above, you will be able to <strong>add</strong> a new subject to the already
                     existing subjects in that course!</p>
             </div>

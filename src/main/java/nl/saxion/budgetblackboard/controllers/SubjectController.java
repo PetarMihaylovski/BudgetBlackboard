@@ -17,12 +17,14 @@ public class SubjectController {
 		Course currentCourse = this.data.findCourseByID(courseID);
 		model.addAttribute("course", currentCourse);
 		model.addAttribute("subjects", currentCourse.getSubjects());
-		return "indexSubject";
+		return "subject/indexSubject";
 	}
 
 	@GetMapping(path = "/add")
-	public String add() {
-		return "addSubject";
+	public String add( @PathVariable int courseID, Model model) {
+		Course currentCourse = this.data.findCourseByID(courseID);
+		model.addAttribute("course",currentCourse);
+		return "subject/addSubject";
 	}
 
 	@PostMapping(path = "/add")
@@ -30,14 +32,16 @@ public class SubjectController {
 		Course currentCourse = this.data.findCourseByID(courseID);
 		currentCourse.addSubject(subject);
 		model.addAttribute("subjects", currentCourse.getSubjects());
-		return "redirect:/courses/subjects/" + currentCourse.getID();
+		return "redirect:/courses/" + courseID +  "/subjects";
 	}
 
 	@GetMapping(path = "/edit/{subjectID}")
 	public String edit(@PathVariable int subjectID, Model model, @PathVariable int courseID) {
+		Course currentCourse = this.data.findCourseByID(courseID);
 		Subject subject = this.data.getSubjectByID(courseID, subjectID);
 		model.addAttribute("subject", subject);
-		return "editSubject";
+		model.addAttribute("course", currentCourse);
+		return "subject/editSubject";
 	}
 
 	@PostMapping(path = "/edit/{subjectID}")
@@ -46,7 +50,7 @@ public class SubjectController {
 		Course currentCourse = this.data.findCourseByID(courseID);
 		currentCourse.setSubjects(this.data.updateSubject(currentCourse, uneditedSubject, editedSubject));
 		model.addAttribute("subjects", currentCourse.getSubjects());
-		return "redirect:/courses/subjects/" + currentCourse.getID();
+		return "redirect:/courses/" + courseID +  "/subjects";
 	}
 
 	@GetMapping(path = "/delete/{subjectID}")
@@ -54,6 +58,6 @@ public class SubjectController {
 		Course currentCourse = this.data.findCourseByID(courseID);
 		currentCourse.setSubjects(this.data.deleteSubjectInCourse(courseID, subjectID));
 		model.addAttribute("subjects", currentCourse.getSubjects());
-		return "redirect:/courses/subjects/" + currentCourse.getID();
+		return "redirect:/courses/" + courseID + "/subjects";
 	}
 }

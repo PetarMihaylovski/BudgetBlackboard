@@ -9,7 +9,7 @@
 <body>
 <header th:insert="fragments/headerFragment.html :: header"></header>
 <div>
-    <form th:action="@{/courses/subjects/edit/{id} (id=${subject.ID})} " th:object="${subject}" method="post">
+    <form th:action="@{/courses/{courseID}/subjects/edit/{id} (courseID=${course.ID}, id=${subject.ID})} " th:object="${subject}" method="post">
         Subject name:<br>
         <label>
             <input type="text" name="name" th:value="${subject.name}">

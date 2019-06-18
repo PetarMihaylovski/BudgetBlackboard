@@ -15,12 +15,12 @@ public class CourseController {
 	public String getCourses(Model model) {
 		model.addAttribute("courses", this.data.getCourses());
 		System.out.println("im here from the delete method " +  this.data.getCourses().size());
-		return "indexCourse";
+		return "course/indexCourse";
 	}
 
 	@GetMapping(path = "/add")
 	public String add() {
-		return "addCourse";
+		return "course/addCourse";
 	}
 
 	@PostMapping(path = "/add")
@@ -34,7 +34,7 @@ public class CourseController {
 	public String edit(@PathVariable("id") int ID, Model model) {
 		Course course = this.data.findCourseByID(ID);
 		model.addAttribute("course", course);
-		return "editCourse";
+		return "course/editCourse";
 	}
 
 	@PostMapping(path = "/edit/{id}")
