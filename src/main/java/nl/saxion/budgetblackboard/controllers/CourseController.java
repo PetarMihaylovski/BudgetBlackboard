@@ -14,6 +14,7 @@ public class CourseController {
 	@GetMapping(path = "")
 	public String getCourses(Model model) {
 		model.addAttribute("courses", this.data.getCourses());
+		System.out.println("im here from the delete method " +  this.data.getCourses().size());
 		return "course/indexCourse";
 	}
 

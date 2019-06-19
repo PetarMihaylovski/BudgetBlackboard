@@ -38,7 +38,7 @@ public class SubjectController {
 	@GetMapping(path = "/edit/{subjectID}")
 	public String edit(@PathVariable int subjectID, Model model, @PathVariable int courseID) {
 		Course currentCourse = this.data.findCourseByID(courseID);
-		Subject subject = this.data.findSubjectByID(courseID, subjectID);
+		Subject subject = this.data.getSubjectByID(courseID, subjectID);
 		model.addAttribute("subject", subject);
 		model.addAttribute("course", currentCourse);
 		return "subject/editSubject";
@@ -46,7 +46,7 @@ public class SubjectController {
 
 	@PostMapping(path = "/edit/{subjectID}")
 	public String editSubject(Subject editedSubject, @PathVariable int subjectID, Model model, @PathVariable int courseID) {
-		Subject uneditedSubject = this.data.findSubjectByID(courseID, subjectID);
+		Subject uneditedSubject = this.data.getSubjectByID(courseID, subjectID);
 		Course currentCourse = this.data.findCourseByID(courseID);
 		currentCourse.setSubjects(this.data.updateSubject(currentCourse, uneditedSubject, editedSubject));
 		model.addAttribute("subjects", currentCourse.getSubjects());

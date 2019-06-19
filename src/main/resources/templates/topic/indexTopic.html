@@ -25,8 +25,8 @@
                 <td>
                     <a th:href="@{/courses/{courseID}/subjects/{subjectID}/edit/{topicID} (courseID=${course.ID},
                      subjectID=${subject.ID}, topicID=${topic.ID})}">Edit a topic</a>
-                    <a th:href="@{/courses/{courseID}/subjects/{subjectID}/delete/{topicID} (courseID=${course.ID},
-                     subjectID=${subject.ID}, topicID=${topic.ID})}">Delete a topic</a>
+                    <a th:href="@{/courses/{courseID}/subjects/delete/{ID} (courseID=${course.ID},
+                     ID=${subject.ID})}">Delete a topic</a>
                 </td>
             </tr>
         </table>
