@@ -2,6 +2,7 @@ package nl.saxion.budgetblackboard.dataProvider;
 
 import nl.saxion.budgetblackboard.models.Course;
 import nl.saxion.budgetblackboard.models.Subject;
+import nl.saxion.budgetblackboard.models.Topic;
 import nl.saxion.budgetblackboard.users.Person;
 import org.springframework.stereotype.Service;
 
@@ -31,11 +32,26 @@ public class DataProvider {
 		Course ta = new Course("Tourism management", 2, 51, 4);
 		this.courses.add(ict);
 		this.courses.add(ta);
-		ict.addSubject(new Subject("Databases", 4,4,8));
-		ict.addSubject(new Subject("Network services", 3,3,8));
-		ict.addSubject(new Subject("Testing", 4,4,8));
-		ta.addSubject(new Subject("Hotelism", 1,1,8));
-		ta.addSubject(new Subject("Uselessism", 1,1,8));
+		Subject databases = new Subject("Databases", 4,4,8);
+		ict.addSubject(databases);
+		databases.addTopic(new Topic("Introduction", 1, 1));
+		databases.addTopic(new Topic("Aggregation", 2,2));
+		Subject networkServices = new Subject("Network services", 3,3,8);
+		ict.addSubject(networkServices);
+		networkServices.addTopic(new Topic("Spring Boot 1", 2,1));
+		networkServices.addTopic(new Topic("Spring Boot 2", 1,2));
+		Subject testing = new Subject("Testing", 4,4,8);
+		ict.addSubject(testing);
+		testing.addTopic(new Topic("Getting requirements: part 1", 4,1));
+		testing.addTopic(new Topic("Getting requirements: part 2", 4,2));
+		Subject management = new Subject("Management", 3,3,8);
+		ta.addSubject(management);
+		management.addTopic(new Topic("What is management", 5,1));
+		management.addTopic(new Topic("Managing people", 2,2));
+		Subject marketing = new Subject("Marketing", 2,5,8);
+		ta.addSubject(marketing);
+		marketing.addTopic(new Topic("What is marketing", 3,1));
+		marketing.addTopic(new Topic("Stocks", 2,2));
 	}
 
 	public ArrayList<Course> getCourses() {

@@ -4,7 +4,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Available courses</title>
+    <title>Courses</title>
         <link rel="stylesheet" type="text/css" href="index-stylesheet.css">
 </head>
 <body>
@@ -28,9 +28,9 @@
                 <td th:text="${course.duration}"></td>
                 <td th:text="${course.minCreditsToPass}"></td>
                 <td>
-                    <a th:href="@{/courses/edit/{ID} (ID=${course.ID})}">Edit course</a>
+                    <a th:href="@{/courses/edit/{ID} (ID=${course.ID})}">Edit a course</a>
                     <a th:href="@{/courses/{ID}/subjects/(ID=${course.ID})}">View subjects</a>
-                    <a th:href="@{/courses/delete/{ID} (ID=${course.ID})}">Delete course</a>
+                    <a th:href="@{/courses/delete/{ID} (ID=${course.ID})}">Delete a course</a>
                 </td>
             </tr>
         </table>

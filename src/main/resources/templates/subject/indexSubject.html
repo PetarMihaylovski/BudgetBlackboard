@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="index-stylesheet.css">
 <head>
     <meta charset="UTF-8">
-    <title>Available subjects</title>
+    <title>Subjects</title>
 </head>
 <body>
 <div id="page">
@@ -26,9 +26,9 @@
                 <td th:text="${subject.credits}"></td>
                 <td th:text="${subject.duration}"></td>
                 <td>
-                    <a th:href="@{/courses/{courseID}/subjects/edit/{ID} (courseID=${course.ID}, ID=${subject.ID})}">Edit subject</a>
-                    <a th:href="@{/templates/subject (ID=${subject.ID})}">View topics</a>
-                    <a th:href="@{/courses/{courseID}/subjects/delete/{ID} (courseID=${course.ID}, ID=${subject.ID})}">Delete subject</a>
+                    <a th:href="@{/courses/{courseID}/subjects/edit/{ID} (courseID=${course.ID}, ID=${subject.ID})}">Edit a subject</a>
+                    <a th:href="@{/courses/{courseID}/subjects/{subjectID} (courseID=${course.ID},subjectID=${subject.ID})}">View topics</a>
+                    <a th:href="@{/courses/{courseID}/subjects/delete/{ID} (courseID=${course.ID}, ID=${subject.ID})}">Delete a subject</a>
                 </td>
             </tr>
         </table>
