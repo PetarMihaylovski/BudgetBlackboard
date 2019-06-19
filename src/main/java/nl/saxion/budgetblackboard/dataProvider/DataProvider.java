@@ -108,4 +108,22 @@ public class DataProvider {
 	public void updateCourse(Course editedCourse, int ID) {
 		this.courses.set(ID, editedCourse);
 	}
+
+	public Topic findTopicByID(int courseID, int subjectID, int topicID){
+		Subject subject = getSubjectByID(courseID, subjectID);
+		for (Topic topic :subject.getTopics()) {
+			if (topic.getID() == topicID){
+				return topic;
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<Topic> updateTopic(int courseID, int subjectID, Topic uneditedTopic, Topic editedTopic){
+		Subject currentSubject = getSubjectByID(courseID, subjectID);
+		ArrayList<Topic> topics = currentSubject.getTopics();
+		int index = currentSubject.getTopics().indexOf(uneditedTopic);
+		topics.set(index, editedTopic);
+		return topics;
+	}
 }

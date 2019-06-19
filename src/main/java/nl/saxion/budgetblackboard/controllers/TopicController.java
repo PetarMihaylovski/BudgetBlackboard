@@ -35,4 +35,23 @@ public class TopicController {
 		model.addAttribute("topics", currentSubject.getTopics());
 		return "redirect:/courses/"  + courseID + "/subjects/" + subjectID;
 	}
+
+	@GetMapping(path = "/edit/{topicID}")
+	public String edit(@PathVariable int courseID, @PathVariable int subjectID,
+					   @PathVariable int topicID, Model model){
+		model.addAttribute("course", this.data.findCourseByID(courseID));
+		model.addAttribute("subject", this.data.getSubjectByID(courseID,subjectID));
+		model.addAttribute("topic", this.data.findTopicByID(courseID, subjectID, topicID));
+		return "topic/editTopic";
+	}
+
+	@PostMapping(path = "edit/{topicID}")
+	public String editCourse(@PathVariable int courseID, @PathVariable int subjectID,
+							 @PathVariable int topicID, Model model, Topic editedTopic){
+		Topic uneditedTopic = this.data.findTopicByID(courseID, subjectID, topicID);
+		Subject currentSubject = this.data.getSubjectByID(courseID, subjectID);
+		currentSubject.setTopics(this.data.updateTopic(courseID, subjectID, uneditedTopic, editedTopic));
+		model.addAttribute("topics", currentSubject.getTopics());
+		return "redirect:/courses/" + courseID + "/subjects/" + subjectID;
+	}
 }
