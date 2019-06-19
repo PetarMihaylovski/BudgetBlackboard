@@ -4,7 +4,6 @@ import nl.saxion.budgetblackboard.models.Course;
 import nl.saxion.budgetblackboard.models.Subject;
 import nl.saxion.budgetblackboard.models.Topic;
 import nl.saxion.budgetblackboard.users.Person;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
@@ -72,7 +71,7 @@ public class DataProvider {
 		return null;
 	}
 
-	public Subject getSubjectByID(int courseID, int subjectID) {
+	public Subject findSubjectByID(int courseID, int subjectID) {
 		Course course = findCourseByID(courseID);
 		for (Subject subject : course.getSubjects()) {
 			if (subject.getID() == subjectID) {
@@ -97,7 +96,7 @@ public class DataProvider {
 	public ArrayList<Subject> deleteSubjectInCourse(int courseID, int subjectID){
 		Course currentCourse = findCourseByID(courseID);
 		ArrayList<Subject> subjects = currentCourse.getSubjects();
-		Subject deletedSubject = getSubjectByID(courseID, subjectID);
+		Subject deletedSubject = findSubjectByID(courseID, subjectID);
 		subjects.remove(deletedSubject);
 		return subjects;
 	}
@@ -107,7 +106,7 @@ public class DataProvider {
 	}
 
 	public Topic findTopicByID(int courseID, int subjectID, int topicID){
-		Subject subject = getSubjectByID(courseID, subjectID);
+		Subject subject = findSubjectByID(courseID, subjectID);
 		for (Topic topic :subject.getTopics()) {
 			if (topic.getID() == topicID){
 				return topic;
@@ -117,10 +116,18 @@ public class DataProvider {
 	}
 
 	public ArrayList<Topic> updateTopic(int courseID, int subjectID, Topic uneditedTopic, Topic editedTopic){
-		Subject currentSubject = getSubjectByID(courseID, subjectID);
+		Subject currentSubject = findSubjectByID(courseID, subjectID);
 		ArrayList<Topic> topics = currentSubject.getTopics();
 		int index = currentSubject.getTopics().indexOf(uneditedTopic);
 		topics.set(index, editedTopic);
+		return topics;
+	}
+
+	public ArrayList<Topic> deleteTopic(int courseID, int subjectID, int topicID) {
+		Subject currentSubject = findSubjectByID(courseID, subjectID);
+		Topic currentTopic = findTopicByID(courseID, subjectID, topicID);
+		ArrayList<Topic> topics = currentSubject.getTopics();
+		topics.remove(currentTopic);
 		return topics;
 	}
 }

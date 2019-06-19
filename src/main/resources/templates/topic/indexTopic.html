@@ -25,8 +25,8 @@
                 <td>
                     <a th:href="@{/courses/{courseID}/subjects/{subjectID}/edit/{topicID} (courseID=${course.ID},
                      subjectID=${subject.ID}, topicID=${topic.ID})}">Edit a topic</a>
-                    <a th:href="@{/courses/{courseID}/subjects/delete/{ID} (courseID=${course.ID},
-                     ID=${subject.ID})}">Delete a topic</a>
+                    <a th:href="@{/courses/{courseID}/subjects/{subjectID}/delete/{topicID} (courseID=${course.ID},
+                     subjectID=${subject.ID}, topicID=${topic.ID})}">Delete a topic</a>
                 </td>
             </tr>
         </table>
@@ -37,7 +37,7 @@
             <div class="content">
                 <h3>
                     <a th:href="@{/courses/{courseID}/subjects/{subjectID}/add (courseID=${course.ID},
-                     subjectID=${subject.ID})}">Add a subject</a></h3>
+                     subjectID=${subject.ID})}">Add a topic</a></h3>
                 <p>When you click the link above, you will be able to <strong>add</strong> a new topic into the chosen
                 subject!</p>
             </div>
