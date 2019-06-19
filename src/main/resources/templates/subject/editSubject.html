@@ -7,7 +7,7 @@
     <title>Title</title>
 </head>
 <body>
-<header th:insert="fragments/headerFragment.html :: header"></header>
+<header th:insert="fragments/fragments.html :: header"></header>
 <div>
     <form th:action="@{/courses/{courseID}/subjects/edit/{id} (courseID=${course.ID}, id=${subject.ID})} " th:object="${subject}" method="post">
         Subject name:<br>
@@ -34,7 +34,7 @@
     </form>
 
 
-    <footer th:insert="fragments/footerFragment.html :: footer"></footer>
+    <footer th:insert="fragments/fragments.html :: footer"></footer>
 </div>
 </body>
 </html>
