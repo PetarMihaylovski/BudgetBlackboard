@@ -31,26 +31,26 @@ public class DataProvider {
 		Course ta = new Course("Tourism management", 2, 51, 4);
 		this.courses.add(ict);
 		this.courses.add(ta);
-		Subject databases = new Subject("Databases", 4, 4, 8);
+		Subject databases = new Subject("Databases", 4,4,8);
 		ict.addSubject(databases);
 		databases.addTopic(new Topic("Introduction", 1, 1));
-		databases.addTopic(new Topic("Aggregation", 2, 2));
-		Subject networkServices = new Subject("Network services", 3, 3, 8);
+		databases.addTopic(new Topic("Aggregation", 2,2));
+		Subject networkServices = new Subject("Network services", 3,3,8);
 		ict.addSubject(networkServices);
-		networkServices.addTopic(new Topic("Spring Boot 1", 2, 1));
-		networkServices.addTopic(new Topic("Spring Boot 2", 1, 2));
-		Subject testing = new Subject("Testing", 4, 4, 8);
+		networkServices.addTopic(new Topic("Spring Boot 1", 2,1));
+		networkServices.addTopic(new Topic("Spring Boot 2", 1,2));
+		Subject testing = new Subject("Testing", 4,4,8);
 		ict.addSubject(testing);
-		testing.addTopic(new Topic("Getting requirements: part 1", 4, 1));
-		testing.addTopic(new Topic("Getting requirements: part 2", 4, 2));
-		Subject management = new Subject("Management", 3, 3, 8);
+		testing.addTopic(new Topic("Getting requirements: part 1", 4,1));
+		testing.addTopic(new Topic("Getting requirements: part 2", 4,2));
+		Subject management = new Subject("Management", 3,3,8);
 		ta.addSubject(management);
-		management.addTopic(new Topic("What is management", 5, 1));
-		management.addTopic(new Topic("Managing people", 2, 2));
-		Subject marketing = new Subject("Marketing", 2, 5, 8);
+		management.addTopic(new Topic("What is management", 5,1));
+		management.addTopic(new Topic("Managing people", 2,2));
+		Subject marketing = new Subject("Marketing", 2,5,8);
 		ta.addSubject(marketing);
-		marketing.addTopic(new Topic("What is marketing", 3, 1));
-		marketing.addTopic(new Topic("Stocks", 2, 2));
+		marketing.addTopic(new Topic("What is marketing", 3,1));
+		marketing.addTopic(new Topic("Stocks", 2,2));
 	}
 
 	public ArrayList<Course> getCourses() {
@@ -72,7 +72,7 @@ public class DataProvider {
 		return null;
 	}
 
-	public Subject findSubjectByID(int courseID, int subjectID) {
+	public Subject getSubjectByID(int courseID, int subjectID) {
 		Course course = findCourseByID(courseID);
 		for (Subject subject : course.getSubjects()) {
 			if (subject.getID() == subjectID) {
@@ -94,10 +94,10 @@ public class DataProvider {
 		this.courses.remove(course);
 	}
 
-	public ArrayList<Subject> deleteSubjectInCourse(int courseID, int subjectID) {
+	public ArrayList<Subject> deleteSubjectInCourse(int courseID, int subjectID){
 		Course currentCourse = findCourseByID(courseID);
 		ArrayList<Subject> subjects = currentCourse.getSubjects();
-		Subject deletedSubject = findSubjectByID(courseID, subjectID);
+		Subject deletedSubject = getSubjectByID(courseID, subjectID);
 		subjects.remove(deletedSubject);
 		return subjects;
 	}
@@ -106,29 +106,21 @@ public class DataProvider {
 		this.courses.set(ID, editedCourse);
 	}
 
-	public Topic findTopicByID(int courseID, int subjectID, int topicID) {
-		Subject subject = findSubjectByID(courseID, subjectID);
-		for (Topic topic : subject.getTopics()) {
-			if (topic.getID() == topicID) {
+	public Topic findTopicByID(int courseID, int subjectID, int topicID){
+		Subject subject = getSubjectByID(courseID, subjectID);
+		for (Topic topic :subject.getTopics()) {
+			if (topic.getID() == topicID){
 				return topic;
 			}
 		}
 		return null;
 	}
 
-	public ArrayList<Topic> updateTopic(int courseID, int subjectID, Topic uneditedTopic, Topic editedTopic) {
-		Subject currentSubject = findSubjectByID(courseID, subjectID);
+	public ArrayList<Topic> updateTopic(int courseID, int subjectID, Topic uneditedTopic, Topic editedTopic){
+		Subject currentSubject = getSubjectByID(courseID, subjectID);
 		ArrayList<Topic> topics = currentSubject.getTopics();
 		int index = currentSubject.getTopics().indexOf(uneditedTopic);
 		topics.set(index, editedTopic);
-		return topics;
-	}
-
-	public ArrayList<Topic> deleteTopic(int courseID, int subjectID, int topicID) {
-		Subject currentSubject = findSubjectByID(courseID, subjectID);
-		Topic currentTopic = findTopicByID(courseID, subjectID, topicID);
-		ArrayList<Topic> topics = currentSubject.getTopics();
-		topics.remove(currentTopic);
 		return topics;
 	}
 }
