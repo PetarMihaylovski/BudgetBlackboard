@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<header th:insert="fragments/fragments.html :: header"></header>
+
+<form th:action="@{/login}" class="form" method="post">
+    <img th:src="@{/images/logo.png}" width="128" height="128" alt="logo"><br/>
+    <input type="email" name="email" placeholder="E-mail" required><br/>
+    <input type="password" name="password" placeholder="Password" required><br/>
+    <br>
+    <input type="submit" value="Login"><br/>
+    <a th:href="@{/register}" th:text="Register"></a>
+</form>
+
+<div th:if="${errorMessage}">
+    <h3 th:text="${errorMessage}">Error message</h3>
+</div>
+
+<header th:insert="fragments/fragments.html :: footer"></header>
+</body>
+</html>

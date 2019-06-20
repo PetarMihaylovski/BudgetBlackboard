@@ -3,13 +3,13 @@ package nl.saxion.budgetblackboard.dataProvider;
 import nl.saxion.budgetblackboard.models.Course;
 import nl.saxion.budgetblackboard.models.Subject;
 import nl.saxion.budgetblackboard.models.Topic;
-import nl.saxion.budgetblackboard.users.Person;
+import nl.saxion.budgetblackboard.models.User;
 
 import java.util.ArrayList;
 
 public class DataProvider {
 	private static DataProvider dataProvider;
-	private ArrayList<Person> users;
+	private ArrayList<User> users;
 	private ArrayList<Course> courses;
 
 	private DataProvider() {
@@ -26,6 +26,8 @@ public class DataProvider {
 	}
 
 	private void init() {
+		User pepi = new User("pepi@email.com", "123");
+		addUser(pepi);
 		Course ict = new Course("ICT", 5, 48, 4);
 		Course ta = new Course("Tourism management", 2, 51, 4);
 		this.courses.add(ict);
@@ -50,6 +52,16 @@ public class DataProvider {
 		ta.addSubject(marketing);
 		marketing.addTopic(new Topic("What is marketing", 3,1));
 		marketing.addTopic(new Topic("Stocks", 2,2));
+	}
+
+	public ArrayList<User> getUsers() {
+		return new ArrayList<>(this.users);
+	}
+
+	public void addUser(User user) {
+		if (!this.users.contains(user)) {
+			this.users.add(user);
+		}
 	}
 
 	public ArrayList<Course> getCourses() {
