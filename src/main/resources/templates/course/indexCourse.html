@@ -36,8 +36,7 @@
         </table>
     </section>
     <section>
-        <h4 th:if="${noEditedCourse == null}"> No last edited course!</h4>
-        <h4 th:if="${lastEditedCourse != ''}"> <span th:text="${lastEditedCourse}"> was the last edited course</span></h4>
+        <h4 th:if="${lastEditedCourse != ''}"> Last edited course is: <span th:text="${lastEditedCourse}">{no edited course yet}</span></h4>
     </section>
 
     <section>
