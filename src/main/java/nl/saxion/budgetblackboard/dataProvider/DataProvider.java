@@ -96,6 +96,8 @@ public class DataProvider {
 	public ArrayList<Subject> updateSubject(Course course, Subject uneditedSubject, Subject editedSubject) {
 		ArrayList<Subject> subjectsInCourse = course.getSubjects();
 		int index = subjectsInCourse.indexOf(uneditedSubject);
+		editedSubject.setTopics(uneditedSubject.getTopics());
+		editedSubject.setID(uneditedSubject.getID());
 		subjectsInCourse.set(index, editedSubject);
 		return subjectsInCourse;
 	}
@@ -114,7 +116,11 @@ public class DataProvider {
 	}
 
 	public void updateCourse(Course editedCourse, int ID) {
-		this.courses.set(ID, editedCourse);
+		Course uneditedCourse = findCourseByID(ID);
+		int index = this.courses.indexOf(uneditedCourse);
+		editedCourse.setID(ID);
+		editedCourse.setSubjects(uneditedCourse.getSubjects());
+		this.courses.set(index, editedCourse);
 	}
 
 	public Topic findTopicByID(int courseID, int subjectID, int topicID){
@@ -131,6 +137,7 @@ public class DataProvider {
 		Subject currentSubject = findSubjectByID(courseID, subjectID);
 		ArrayList<Topic> topics = currentSubject.getTopics();
 		int index = currentSubject.getTopics().indexOf(uneditedTopic);
+		editedTopic.setID(uneditedTopic.getID());
 		topics.set(index, editedTopic);
 		return topics;
 	}

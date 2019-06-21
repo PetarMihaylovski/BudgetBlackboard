@@ -7,25 +7,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping(path = "/courses/{courseID}/subjects/{subjectID}")
 public class TopicController {
 	private DataProvider data = DataProvider.getInstance();
 
 	@GetMapping(path = "")
-	public String getTopics(@PathVariable int courseID, @PathVariable int subjectID,  Model model){
-		Subject currentSubject = this.data.findSubjectByID(courseID ,subjectID);
-		model.addAttribute("topics", currentSubject.getTopics());
-		model.addAttribute("course", this.data.findCourseByID(courseID));
-		model.addAttribute("subject", currentSubject);
-		return "topic/indexTopic";
+	public String getTopics(@PathVariable int courseID, @PathVariable int subjectID, Model model, HttpSession session){
+		if (session.getAttribute("email")!= null){
+			Subject currentSubject = this.data.findSubjectByID(courseID ,subjectID);
+			model.addAttribute("topics", currentSubject.getTopics());
+			model.addAttribute("course", this.data.findCourseByID(courseID));
+			model.addAttribute("subject", currentSubject);
+			return "topic/indexTopic";
+		}
+		return "redirect:/login";
 	}
 
 	@GetMapping(path = "/add")
-	public String add(@PathVariable int courseID, @PathVariable int subjectID, Model model){
-		model.addAttribute("course", this.data.findCourseByID(courseID));
-		model.addAttribute("subject", this.data.findSubjectByID(courseID, subjectID));
-		return "topic/addTopic";
+	public String add(@PathVariable int courseID, @PathVariable int subjectID, Model model, HttpSession session){
+		if (session.getAttribute("email")!= null){
+			model.addAttribute("course", this.data.findCourseByID(courseID));
+			model.addAttribute("subject", this.data.findSubjectByID(courseID, subjectID));
+			return "topic/addTopic";
+		}
+		return "redirect:/login";
 	}
 
 	@PostMapping(path = "/add")
@@ -38,11 +46,14 @@ public class TopicController {
 
 	@GetMapping(path = "/edit/{topicID}")
 	public String edit(@PathVariable int courseID, @PathVariable int subjectID,
-					   @PathVariable int topicID, Model model){
-		model.addAttribute("course", this.data.findCourseByID(courseID));
-		model.addAttribute("subject", this.data.findSubjectByID(courseID,subjectID));
-		model.addAttribute("topic", this.data.findTopicByID(courseID, subjectID, topicID));
-		return "topic/editTopic";
+					   @PathVariable int topicID, Model model, HttpSession session){
+		if (session.getAttribute("email")!= null){
+			model.addAttribute("course", this.data.findCourseByID(courseID));
+			model.addAttribute("subject", this.data.findSubjectByID(courseID,subjectID));
+			model.addAttribute("topic", this.data.findTopicByID(courseID, subjectID, topicID));
+			return "topic/editTopic";
+		}
+		return "redirect:/login";
 	}
 
 	@PostMapping(path = "edit/{topicID}")
@@ -57,10 +68,13 @@ public class TopicController {
 
 	@GetMapping(path = "delete/{topicID}")
 	public String deleteTopic(@PathVariable int courseID, @PathVariable int subjectID,
-							  @PathVariable int topicID, Model model){
-		Subject currentSubject= this.data.findSubjectByID(courseID, subjectID);
-		currentSubject.setTopics(this.data.deleteTopic(courseID, subjectID, topicID));
-		model.addAttribute("topics", currentSubject.getTopics());
-		return "redirect:/courses/" + courseID + "/subjects/" + subjectID;
+							  @PathVariable int topicID, Model model, HttpSession session){
+		if (session.getAttribute("email")!= null){
+			Subject currentSubject= this.data.findSubjectByID(courseID, subjectID);
+			currentSubject.setTopics(this.data.deleteTopic(courseID, subjectID, topicID));
+			model.addAttribute("topics", currentSubject.getTopics());
+			return "redirect:/courses/" + courseID + "/subjects/" + subjectID;
+		}
+		return "redirect:/login";
 	}
 }

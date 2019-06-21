@@ -51,6 +51,10 @@ public class Course extends Header {
 		this.subjects = subjects;
 	}
 
+	public void setID(int ID) {
+		this.ID = ID;
+	}
+
 	@Override
 	public String toString() {
 		//TODO: create a nice toString method.

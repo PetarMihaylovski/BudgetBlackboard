@@ -41,7 +41,6 @@ public class LoginController {
 			}
 		}
 		model.addAttribute("errorMessage", "Username is not valid. Try again or register");
-		System.out.println(user.getEmail() + "   " + user.getPassword());
-		return "login/loginIndex";
+		return "redirect:/login" ;
 	}
 }

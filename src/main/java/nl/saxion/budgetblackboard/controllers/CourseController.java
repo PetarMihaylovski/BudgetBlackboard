@@ -5,22 +5,35 @@ import nl.saxion.budgetblackboard.models.Course;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.WebUtils;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 @Controller
 @RequestMapping("/courses")
 public class CourseController {
-	private final DataProvider data = DataProvider.getInstance();
+	private DataProvider data = DataProvider.getInstance();
 
 	@GetMapping(path = "")
-	public String getCourses(Model model) {
-		model.addAttribute("courses", this.data.getCourses());
-		System.out.println("im here from the delete method " +  this.data.getCourses().size());
-		return "course/indexCourse";
+	public String getCourses(Model model, HttpSession session) {
+		if (session.getAttribute("email") != null) {
+			model.addAttribute("courses", this.data.getCourses());
+			return "course/indexCourse";
+		}
+		return "redirect:/login";
 	}
 
 	@GetMapping(path = "/add")
-	public String add() {
-		return "course/addCourse";
+	public String add(HttpSession session) {
+		if (session.getAttribute("email") != null) {
+			return "course/addCourse";
+		}
+		return "redirect:/login";
 	}
 
 	@PostMapping(path = "/add")
@@ -31,10 +44,13 @@ public class CourseController {
 	}
 
 	@GetMapping(path = "/edit/{id}")
-	public String edit(@PathVariable("id") int ID, Model model) {
-		Course course = this.data.findCourseByID(ID);
-		model.addAttribute("course", course);
-		return "course/editCourse";
+	public String edit(@PathVariable("id") int ID, Model model, HttpSession session) {
+		if (session.getAttribute("email") != null) {
+			Course course = this.data.findCourseByID(ID);
+			model.addAttribute("course", course);
+			return "course/editCourse";
+		}
+		return "redirect:/login";
 	}
 
 	@PostMapping(path = "/edit/{id}")
@@ -44,15 +60,12 @@ public class CourseController {
 		return "redirect:/courses";
 	}
 
-	@GetMapping(path = "/view")
-	public String viewSubject(@PathVariable int ID) {
-		Course course = this.data.findCourseByID(ID);
-		return "redirect:/courses/subjects/" + course.getID();
-	}
-
 	@GetMapping(path = "/delete/{ID}")
-	public String deleteCourse(@PathVariable int ID) {
-		this.data.deleteCourse(ID);
-		return "redirect:/courses";
+	public String deleteCourse(@PathVariable int ID, HttpSession session) {
+		if (session.getAttribute("email") != null) {
+			this.data.deleteCourse(ID);
+			return "redirect:/courses";
+		}
+		return "redirect:/login";
 	}
 }

@@ -12,6 +12,10 @@ public class Topic extends Header {
 		++lastAssignedID;
 	}
 
+	public void setID(int ID) {
+		this.ID = ID;
+	}
+
 	public int getWeek() {
 		return week;
 	}

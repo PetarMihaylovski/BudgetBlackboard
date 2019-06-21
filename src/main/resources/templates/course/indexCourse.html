@@ -36,6 +36,11 @@
         </table>
     </section>
     <section>
+        <h4 th:if="${noEditedCourse == null}"> No last edited course!</h4>
+        <h4 th:if="${lastEditedCourse != ''}"> <span th:text="${lastEditedCourse}"> was the last edited course</span></h4>
+    </section>
+
+    <section>
         <!--The available option buttons from which a person can choose-->
         <aside>
             <div class="content">
