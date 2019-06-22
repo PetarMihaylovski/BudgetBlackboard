@@ -10,6 +10,7 @@
 <body>
 <div id="page">
     <header th:insert="fragments/fragments.html :: header"></header>
+    <a th:insert="fragments/fragments.html ::a"></a>
     <section class="main">
         <!--The main table with all available courses-->
         <table>
@@ -26,9 +27,12 @@
                 <td th:text="${subject.credits}"></td>
                 <td th:text="${subject.duration}"></td>
                 <td>
-                    <a th:href="@{/courses/{courseID}/subjects/edit/{ID} (courseID=${course.ID}, ID=${subject.ID})}">Edit a subject</a>
-                    <a th:href="@{/courses/{courseID}/subjects/{subjectID} (courseID=${course.ID},subjectID=${subject.ID})}">View topics</a>
-                    <a th:href="@{/courses/{courseID}/subjects/delete/{ID} (courseID=${course.ID}, ID=${subject.ID})}">Delete a subject</a>
+                    <a th:href="@{/courses/{courseID}/subjects/edit/{ID} (courseID=${course.ID}, ID=${subject.ID})}">Edit
+                        a subject</a>
+                    <a th:href="@{/courses/{courseID}/subjects/{subjectID} (courseID=${course.ID},subjectID=${subject.ID})}">View
+                        topics</a>
+                    <a th:href="@{/courses/{courseID}/subjects/delete/{ID} (courseID=${course.ID}, ID=${subject.ID})}">Delete
+                        a subject</a>
                 </td>
             </tr>
         </table>
@@ -42,6 +46,23 @@
                     existing subjects in that course!</p>
             </div>
         </aside>
+    </section>
+
+    <section>
+        <div>
+            <p> Now introducing the new <strong>EASY SEARCH ALGORITHM</strong>. If you do not remember the subject, in which
+                the specific topic is just write the topic's name and the subject will appear!</p>
+            <div class="search-container">
+                <form th:action="@{/courses/{courseID}/subjects/search (courseID=${course.ID})}" method="get">
+                    <input type="text" placeholder="Search topic name" name="topicName">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+
+            <div th:if="${errorMessage}">
+                <h3 th:text="${errorMessage}">Error message</h3>
+            </div>
+        </div>
     </section>
     <footer th:insert="fragments/fragments.html :: footer"></footer>
 </div>

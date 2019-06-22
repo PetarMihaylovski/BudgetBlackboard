@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(path = "")
 public class LoginController {
 	private DataProvider data = DataProvider.getInstance();
+	private boolean wrongCredentials;
 
 	@GetMapping(path = "")
 	public String redirect() {
@@ -21,17 +22,20 @@ public class LoginController {
 	}
 
 	@GetMapping(path = "/login")
-	public String login(HttpSession session) {
+	public String login(HttpSession session, Model model) {
 		if (session.getAttribute("email") != null) {
 			return "redirect:/courses";
 		}
 		else {
+			if (this.wrongCredentials){
+				model.addAttribute("errorMessage", "Wrong credentials. Please try again");
+			}
 			return "login/loginIndex";
 		}
 	}
 
 	@PostMapping(path = "/login")
-	public String loginPost(HttpSession session, Model model, User user){
+	public String loginPost(HttpSession session, User user){
 		for (User usr : this.data.getUsers()) {
 			if (usr.getEmail().equals(user.getEmail())){
 				if (usr.getPassword().equals(user.getPassword())){
@@ -40,7 +44,13 @@ public class LoginController {
 				}
 			}
 		}
-		model.addAttribute("errorMessage", "Username is not valid. Try again or register");
+		this.wrongCredentials = true;
 		return "redirect:/login" ;
+	}
+
+	@GetMapping(path = "/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/login";
 	}
 }

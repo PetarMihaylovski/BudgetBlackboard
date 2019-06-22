@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(path = "/courses/{courseID}/subjects")
 public class SubjectController {
 	private DataProvider data = DataProvider.getInstance();
+	private boolean wrongSearch;
 
 	@GetMapping(path = "")
 	public String getSubjects(Model model, @PathVariable int courseID, HttpSession session) {
@@ -21,6 +22,9 @@ public class SubjectController {
 			Course currentCourse = this.data.findCourseByID(courseID);
 			model.addAttribute("course", currentCourse);
 			model.addAttribute("subjects", currentCourse.getSubjects());
+			if (this.wrongSearch) {
+				model.addAttribute("errorMessage", "No topic with such a name!");
+			}
 			return "subject/indexSubject";
 		}
 		return "redirect:/login";
@@ -35,7 +39,6 @@ public class SubjectController {
 		}
 		return "redirect:/login";
 	}
-
 
 	@PostMapping(path = "/add")
 	public String addSubject(Subject subject, Model model, @PathVariable int courseID) {
@@ -73,6 +76,22 @@ public class SubjectController {
 			currentCourse.setSubjects(this.data.deleteSubjectInCourse(courseID, subjectID));
 			model.addAttribute("subjects", currentCourse.getSubjects());
 			return "redirect:/courses/" + courseID + "/subjects";
+		}
+		return "redirect:/login";
+	}
+
+	@GetMapping(path = "/search")
+	public String findTopic(@PathVariable int courseID, @RequestParam(defaultValue = "", value = "topicName") String topicName,
+							HttpSession session) {
+		if (session.getAttribute("email") != null) {
+			if (!topicName.equals("")) {
+				Subject subject = this.data.findSubjectByTopicName(topicName);
+				if (subject != null) {
+					return "redirect:/courses/" + courseID + "/subjects/" + subject.getID();
+				}
+				this.wrongSearch = true;
+				return "redirect:/courses/" + courseID + "/subjects";
+			}
 		}
 		return "redirect:/login";
 	}

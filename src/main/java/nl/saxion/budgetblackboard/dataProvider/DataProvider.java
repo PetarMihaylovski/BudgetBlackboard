@@ -1,9 +1,6 @@
 package nl.saxion.budgetblackboard.dataProvider;
 
-import nl.saxion.budgetblackboard.models.Course;
-import nl.saxion.budgetblackboard.models.Subject;
-import nl.saxion.budgetblackboard.models.Topic;
-import nl.saxion.budgetblackboard.models.User;
+import nl.saxion.budgetblackboard.models.*;
 
 import java.util.ArrayList;
 
@@ -128,6 +125,19 @@ public class DataProvider {
 		for (Topic topic :subject.getTopics()) {
 			if (topic.getID() == topicID){
 				return topic;
+			}
+		}
+		return null;
+	}
+
+	public Subject findSubjectByTopicName(String topicName){
+		for (Course course : this.courses) {
+			for (Subject subject : course.getSubjects()) {
+				for (Topic topic : subject.getTopics()) {
+					if (topic.getName().toLowerCase().equals(topicName.toLowerCase())){
+						return subject;
+					}
+				}
 			}
 		}
 		return null;
