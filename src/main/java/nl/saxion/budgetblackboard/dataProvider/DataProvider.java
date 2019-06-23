@@ -25,6 +25,8 @@ public class DataProvider {
 	private void init() {
 		User pepi = new User("pepi@email.com", "123");
 		addUser(pepi);
+		User ivo = new User("ivo@gmail.com", "111");
+		addUser(ivo);
 		Course ict = new Course("ICT", 5, 48, 4);
 		Course ta = new Course("Tourism management", 2, 51, 4);
 		this.courses.add(ict);

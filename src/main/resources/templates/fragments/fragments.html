@@ -5,14 +5,14 @@
 </head>
 <body>
 <header>
-    <h1>Budget Blackboard</h1>
+    <a th:href="@{/courses}"><h1>Budget Blackboard</h1></a>
     <img th:src="@{../../images/logo.png}" height="45" width="45"/>
+    <a th:href="@{/logout}" methods="post"><span>Logout</span> </a>
 </header>
 
 <footer>
     Made by Ivo Tasev & Petar Mihaylovski for Network Services
 </footer>
 
-<a th:href="@{/logout}" methods="post"><span>Logout</span> </a>
 </body>
 </html>
