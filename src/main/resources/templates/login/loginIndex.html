@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="layout.css">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -8,16 +9,23 @@
 <body>
 <header th:insert="fragments/fragments.html :: header"></header>
 
-<form th:action="@{/login}" class="form" method="post">
-    <input type="email" name="email" placeholder="E-mail" required><br/>
-    <input type="password" name="password" placeholder="Password" required><br/>
-    <br>
-    <input type="submit" value="Login"><br/>
-    <a th:href="@{/register}" th:text="Register"></a>
-</form>
+<div id="login_page">
+    <form id="login_from" th:action="@{/login}" class="form" method="post">
+        <label>
+            <input class="input" type="email" name="email" placeholder="E-mail" required>
+        </label><br/>
+        <label>
+            <input class="input" type="password" name="password" placeholder="Password" required>
+        </label><br/>
+        <br>
+        <input type="submit" value="Login">
+<!--        <span class="or">OR</span> <br>-->
+        <a class="btn" th:href="@{/register}" th:text="Register"></a>
+    </form>
 
-<div th:if="${errorMessage}">
-    <h2 th:text="${errorMessage}">The error message</h2>
+    <div th:if="${errorMessage}">
+        <h2 th:text="${errorMessage}">The error message</h2>
+    </div>
 </div>
 
 <footer th:insert="fragments/fragments.html :: footer"></footer>
