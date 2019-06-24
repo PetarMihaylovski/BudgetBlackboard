@@ -12,25 +12,25 @@
 <div>
     <header th:insert="fragments/fragments.html :: header"></header>
 
-    <form th:action="@{/courses/add}" method="post">
+    <form class="indexForm" th:action="@{/courses/add}" method="post">
         Course name:<br>
         <label>
-            <input type="text" name="name" placeholder="Name">
+            <input class="input" type="text" name="name" placeholder="Name">
         </label>
         <br>
         Difficulty:<br>
         <label>
-            <input type="text" name="difficulty" placeholder="Course difficulty">
+            <input class="input" type="text" name="difficulty" placeholder="Course difficulty">
         </label>
         <br>
         Minimum credits to pass:<br>
         <label>
-            <input type="number" name="minCreditsToPass" placeholder="Minimum ETCS to pass">
+            <input class="input" type="number" name="minCreditsToPass" placeholder="Minimum ETCS to pass">
         </label>
         <br>
         Duration:<br>
         <label>
-            <input type="number" name="duration" placeholder="The duration of the course">
+            <input class="input" type="number" name="duration" placeholder="The duration of the course">
         </label>
         <br>
         <input type="submit" value="Add course!">

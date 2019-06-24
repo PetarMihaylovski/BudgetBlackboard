@@ -10,21 +10,21 @@
 <body>
 <header th:insert="fragments/fragments.html :: header"></header>
 <div>
-    <form th:action="@{/courses/{courseID}/subjects/{subjectID}/edit/{topicID} (courseID=${course.ID},
+    <form class="indexForm" th:action="@{/courses/{courseID}/subjects/{subjectID}/edit/{topicID} (courseID=${course.ID},
      subjectID=${subject.ID}, topicID=${topic.ID})} " th:object="${topic}" method="post">
         Topic week:<br>
         <label>
-            <input type="number" name="week" th:value="${topic.week}">
+            <input class="input" type="number" name="week" th:value="${topic.week}">
         </label>
         <br>
         Topic name:<br>
         <label>
-            <input type="text" name="name" th:value="${topic.name}">
+            <input class="input" type="text" name="name" th:value="${topic.name}">
         </label>
         <br>
         Difficulty<br>
         <label>
-            <input type="number" name="difficulty" th:value="${topic.difficulty}">
+            <input class="input" type="number" name="difficulty" th:value="${topic.difficulty}">
         </label>
         <br>
         <input type="submit" value="Edit the topic">

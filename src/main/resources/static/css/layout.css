@@ -1,5 +1,6 @@
 body {
     background-color: #CCD6EB;
+    text-align: center;
 }
 
 header {
@@ -67,6 +68,7 @@ section.main {
     width: 100%;
     height: 100%;
 }
+
 table {
     margin: 0 auto; /* or margin: 0 auto 0 auto */
     border-collapse: collapse;
@@ -81,6 +83,7 @@ th, td {
 tr:nth-child(even) {
     background-color: #DAF7DC
 }
+
 tr:nth-child(odd) {
     background-color: #CAE7B9
 }
@@ -106,27 +109,47 @@ td.options a:active {
     text-decoration: underline;
 }
 
-.lastEditedCourse{
+.lastEditedCourse {
     text-align: left;
 }
 
-section.main{
+section.main {
     margin-top: 20px;
     margin-bottom: 30px;
     padding: 0;
 }
 
-section.main aside{
+section.main aside {
     width: 50%;
     float: left;
     text-align: center;
 }
 
-section.main .content{
+section.main .content {
     margin: 15px;
     background: no-repeat center top;
     background-size: 75px 75px;
     padding-top: 20px;
+}
+
+form.indexForm {
+    display: inline-block;
+}
+
+form.indexForm input[type="submit"] {
+    alignment: center;
+    border: 1px solid #fff;
+    padding: 4px 15px;
+    font-size: 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    background-color: buttonface;
+    transition: background-color .5s;
+    display: inline-block;
+}
+
+form.indexForm input[type="submit"]:hover {
+    background-color: rgba(0, 0, 0, .3);
 }
 
 footer {

@@ -10,25 +10,25 @@
 <body>
 <header th:insert="fragments/fragments.html :: header"></header>
 <div>
-    <form th:action="@{/courses/{courseID}/subjects/edit/{id} (courseID=${course.ID}, id=${subject.ID})} " th:object="${subject}" method="post">
+    <form class="indexForm" th:action="@{/courses/{courseID}/subjects/edit/{id} (courseID=${course.ID}, id=${subject.ID})} " th:object="${subject}" method="post">
         Subject name:<br>
         <label>
-            <input type="text" name="name" th:value="${subject.name}">
+            <input class="input" type="text" name="name" th:value="${subject.name}">
         </label>
         <br>
         Difficulty:<br>
         <label>
-            <input type="number" name="difficulty" th:value="${subject.difficulty}">
+            <input class="input" type="number" name="difficulty" th:value="${subject.difficulty}">
         </label>
         <br>
         Available credits<br>
         <label>
-            <input type="number" name="credits" th:value="${subject.credits}">
+            <input class="input" type="number" name="credits" th:value="${subject.credits}">
         </label>
         <br>
         Duration:<br>
         <label>
-            <input type="number" name="duration" th:value="${subject.duration}">
+            <input class="input" type="number" name="duration" th:value="${subject.duration}">
         </label>
         <br>
         <input type="submit" value="Edit">
