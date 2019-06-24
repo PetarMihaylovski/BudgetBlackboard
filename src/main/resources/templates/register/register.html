@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{/css/form.css}" rel="stylesheet" >
     <title>Register</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}" type="text/css">
 </head>
 <body>
-
+<header th:insert="fragments/fragments.html :: header"></header>
 <form class="form" method="post">
     <input type="email" name="email" placeholder="E-mail"><br>
     <input type="password" name="password" placeholder="Password"><br>
@@ -14,5 +14,6 @@
     <br>
     <input type="submit" name="register" placeholder="Register">
 </form>
+<footer th:insert="fragments/fragments.html :: footer"></footer>
 </body>
 </html>
