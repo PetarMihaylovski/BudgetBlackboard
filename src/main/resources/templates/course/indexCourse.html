@@ -28,17 +28,16 @@
                 <td th:text="${course.difficulty}"></td>
                 <td th:text="${course.minCreditsToPass}"></td>
                 <td th:text="${course.duration}"></td>
-                <td>
-                    <a th:href="@{/courses/edit/{ID} (ID=${course.ID})}">Edit a course</a>
+                <td class="options">
+                    <a class="" th:href="@{/courses/edit/{ID} (ID=${course.ID})}">Edit a course</a>
                     <a th:href="@{/courses/{ID}/subjects/(ID=${course.ID})}">View subjects</a>
                     <a th:href="@{/courses/delete/{ID} (ID=${course.ID})}">Delete a course</a>
                 </td>
             </tr>
         </table>
     </section>
-    <section>
-        <h4 th:if="${lastEditedCourse != ''}"> Last edited course is: <span th:text="${lastEditedCourse}">{no edited course yet}</span>
-        </h4>
+    <section class="lastEditedCourse">
+        <h4 th:if="${lastEditedCourse != ''}"> Last edited course is: <span th:text="${lastEditedCourse}">{no edited course yet}</span></h4>
     </section>
 
     <section>

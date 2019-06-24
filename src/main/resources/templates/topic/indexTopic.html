@@ -24,7 +24,7 @@
                 <td th:text="${'Week: ' +  topic.week} "></td>
                 <td th:text="${topic.name}"></td>
                 <td th:text="${topic.difficulty}"></td>
-                <td>
+                <td class="options">
                     <a th:href="@{/courses/{courseID}/subjects/{subjectID}/edit/{topicID} (courseID=${course.ID},
                      subjectID=${subject.ID}, topicID=${topic.ID})}">Edit a topic</a>
                     <a th:href="@{/courses/{courseID}/subjects/{subjectID}/delete/{topicID} (courseID=${course.ID},

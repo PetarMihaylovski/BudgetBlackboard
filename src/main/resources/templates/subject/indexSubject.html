@@ -26,7 +26,7 @@
                 <td th:text="${subject.difficulty}"></td>
                 <td th:text="${subject.credits}"></td>
                 <td th:text="${subject.duration}"></td>
-                <td>
+                <td class="options">
                     <a th:href="@{/courses/{courseID}/subjects/edit/{ID} (courseID=${course.ID}, ID=${subject.ID})}">Edit
                         a subject</a>
                     <a th:href="@{/courses/{courseID}/subjects/{subjectID} (courseID=${course.ID},subjectID=${subject.ID})}">View
