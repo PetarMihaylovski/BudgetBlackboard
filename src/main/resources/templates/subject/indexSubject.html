@@ -37,7 +37,7 @@
             </tr>
         </table>
     </section>
-    <section>
+    <section class="main">
         <!--The available option buttons from which a person can choose-->
         <aside>
             <div class="content">
@@ -48,20 +48,22 @@
         </aside>
     </section>
 
-    <section>
-        <div>
-            <p> Now introducing the new <strong>EASY SEARCH ALGORITHM</strong>. If you do not remember the subject, in which
-                the specific topic is just write the topic's name and the subject will appear!</p>
-            <div class="search-container">
+    <section class="main">
+        <div class="content">
+            <aside>
                 <form th:action="@{/courses/{courseID}/subjects/search (courseID=${course.ID})}" method="get">
                     <input type="text" placeholder="Search topic name" name="topicName">
                     <button type="submit">Search</button>
                 </form>
-            </div>
+                <p> Now introducing the new <strong>EASY SEARCH ALGORITHM</strong>. If you do not remember the subject,
+                    in
+                    which
+                    the specific topic is just write the topic's name and the subject will appear!</p>
+            </aside>
+        </div>
 
-            <div th:if="${errorMessage}">
-                <h3 th:text="${errorMessage}">Error message</h3>
-            </div>
+        <div th:if="${errorMessage}">
+            <h3 th:text="${errorMessage}">Error message</h3>
         </div>
     </section>
     <footer th:insert="fragments/fragments.html :: footer"></footer>

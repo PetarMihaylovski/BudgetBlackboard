@@ -2,7 +2,6 @@ body {
     background-color: #CCD6EB;
 }
 
-/* Login screen stylization */
 header {
     text-align: center;
     background-color: #EEC8E0;
@@ -60,7 +59,6 @@ a.btn {
     text-decoration: none;
 }
 
-/* Main indexes stylization*/
 div#page {
     text-align: center;
 }
@@ -69,7 +67,6 @@ section.main {
     width: 100%;
     height: 100%;
 }
-/*Table styling*/
 table {
     margin: 0 auto; /* or margin: 0 auto 0 auto */
     border-collapse: collapse;
@@ -93,8 +90,6 @@ th {
     color: white;
 }
 
-/*Option buttons styling*/
-
 td.options a:link {
     text-decoration: none;
 }
@@ -113,6 +108,25 @@ td.options a:active {
 
 .lastEditedCourse{
     text-align: left;
+}
+
+section.main{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding: 0;
+}
+
+section.main aside{
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+
+section.main .content{
+    margin: 15px;
+    background: no-repeat center top;
+    background-size: 75px 75px;
+    padding-top: 20px;
 }
 
 footer {
