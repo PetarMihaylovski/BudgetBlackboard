@@ -7,3 +7,5 @@ Java's Springboot application imitating Blackboard. A logged in user can create,
   * Creating Springboot controllers
   * Using Thymeleaf templating
   * Using sessions and cookies.
+  
+  #### Project made for Network Services during quartile 4, year 1 in Saxion University of Applied Science
