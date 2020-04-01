@@ -5,14 +5,10 @@ import nl.saxion.budgetblackboard.models.Course;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 @Controller
 @RequestMapping("/courses")
@@ -24,17 +20,19 @@ public class CourseController {
 	public String getCourses(Model model, HttpSession session, HttpServletResponse response,
 							 @CookieValue(value ="lastEditedCourse" , defaultValue = "")String courseID) {
 		if (session.getAttribute("email") != null) {
-			System.out.println("Course ID: " + lastEditedCourse);
 			if (lastEditedCourse > -1){
-				System.out.println("seks");
 				courseID = lastEditedCourse + "";
-				Course lastEditedCourse = this.data.findCourseByID(Integer.parseInt(courseID));
-				Cookie cookie = new Cookie("lastEditedCourse", lastEditedCourse.getID()+"");
-				response.addCookie(cookie);
-				model.addAttribute("lastEditedCourse", lastEditedCourse.getName());
+				try{
+					Course lastEditedCourse = this.data.findCourseByID(Integer.parseInt(courseID));
+					Cookie cookie = new Cookie("lastEditedCourse", lastEditedCourse.getID()+"");
+					response.addCookie(cookie);
+					model.addAttribute("lastEditedCourse", lastEditedCourse.getName());
+				}
+				catch (NullPointerException npe){
+					model.addAttribute("deleted", null);
+				}
 			}
 			else {
-				System.out.println("ebane");
 				model.addAttribute("noEditedCourse", null);
 			}
 			model.addAttribute("courses", this.data.getCourses());

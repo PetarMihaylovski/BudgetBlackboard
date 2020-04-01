@@ -1,3 +1,5 @@
+@import "colors.css";
+
 body {
     background-color: #CCD6EB;
     text-align: center;
@@ -89,15 +91,11 @@ tr:nth-child(odd) {
 }
 
 th {
-    background-color: #9EE493;
+    background-color: var(--custom-color-green);
     color: white;
 }
 
-td.options a:link {
-    text-decoration: none;
-}
-
-td.options a:visited {
+td.options a:link, a:visited {
     text-decoration: none;
 }
 
@@ -154,7 +152,7 @@ form.indexForm input[type="submit"]:hover {
 
 footer {
     text-align: center;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     height: 50px;
