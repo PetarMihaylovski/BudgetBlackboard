@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}" type="text/css">
+</head>
+<body>
+<header th:insert="fragments/fragments.html :: header"></header>
+<form class="indexForm" method="post">
+    <input class="input" type="email" name="email" placeholder="E-mail"><br>
+    <input class="input" type="password" name="password" placeholder="Password"><br>
+    <input class="input" type="password" name="password2" placeholder="Repeat password"><br>
+    <br>
+    <input type="submit" name="register" placeholder="Register">
+</form>
+<footer th:insert="fragments/fragments.html :: footer"></footer>
+</body>
+</html>

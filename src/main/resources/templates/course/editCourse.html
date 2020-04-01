@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Course</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}" type="text/css">
+</head>
+<body>
+<header th:insert="fragments/fragments.html :: header"></header>
+<div>
+    <form class="indexForm" th:action="@{/courses/edit/{id} (id=${course.ID})}" th:object="${course}" method="post">
+        Course name:<br>
+        <label>
+            <input class="input" type="text" name="name" th:value="${course.name}">
+        </label>
+        <br>
+        Difficulty:<br>
+        <label>
+            <input class="input" type="number" name="difficulty" th:value="${course.difficulty}">
+        </label>
+        <br>
+        Minimum credits to pass:<br>
+        <label>
+            <input class="input" type="number" name="minCreditsToPass" th:value="${course.minCreditsToPass}">
+        </label>
+        <br>
+        Duration:<br>
+        <label>
+            <input class="input" type="number" name="duration" th:value="${course.duration}">
+        </label>
+        <br>
+        <input type="submit" value="Edit">
+    </form>
+    <footer th:insert="fragments/fragments.html :: footer"></footer>
+</div>
+</body>
+</html>

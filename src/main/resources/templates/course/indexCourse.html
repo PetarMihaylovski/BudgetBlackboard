@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Courses</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}" type="text/css">
+</head>
+<body>
+
+<header th:insert="fragments/fragments.html :: header"></header>
+<div id="page">
+
+
+    <section class="main">
+        <!--The main table with all available courses-->
+        <table>
+            <tr>
+                <th>Course name</th>
+                <th>Difficulty</th>
+                <th>Available credits</th>
+                <th>Duration (in years)</th>
+                <th>Options</th>
+            </tr>
+            <tr th:each="course :${courses}">
+                <td th:text="${course.name}"></td>
+                <td th:text="${course.difficulty}"></td>
+                <td th:text="${course.minCreditsToPass}"></td>
+                <td th:text="${course.duration}"></td>
+                <td class="options">
+                    <a class="" th:href="@{/courses/edit/{ID} (ID=${course.ID})}">Edit a course</a>
+                    <a th:href="@{/courses/{ID}/subjects/(ID=${course.ID})}">View subjects</a>
+                    <a th:href="@{/courses/delete/{ID} (ID=${course.ID})}">Delete a course</a>
+                </td>
+            </tr>
+        </table>
+    </section>
+    <section class="lastEditedCourse">
+        <h4 th:if="${deleted}"> Last edited course was deleted</h4>
+        <h4 th:if="${lastEditedCourse != ''}"> Last edited course is: <span th:text="${lastEditedCourse}">{no edited course yet}</span></h4>
+    </section>
+
+    <section>
+        <!--The available option buttons from which a person can choose-->
+        <aside>
+            <div class="content">
+                <h3><a href="/courses/add">Add a course</a></h3>
+                <p>When you click the link above, you will be able to <strong>add</strong> a new course to the already
+                    existing courses!</p>
+            </div>
+        </aside>
+    </section>
+
+
+</div>
+<footer th:insert="fragments/fragments.html :: footer"></footer>
+</body>
+</html>

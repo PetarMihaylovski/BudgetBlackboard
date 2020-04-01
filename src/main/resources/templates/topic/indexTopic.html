@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" th:href="@{/css/layout.css}" type="text/css">
+    <title>Topics</title>
+</head>
+<body>
+<div id="page">
+    <header th:insert="fragments/fragments.html :: header"></header>
+
+    <section class="main">
+        <!--The main table with all available courses-->
+        <table>
+            <tr>
+                <th></th>
+                <th>Topic name</th>
+                <th>Difficulty</th>
+                <th>Options</th>
+            </tr>
+            <tr th:each="topic:${topics}">
+                <td th:text="${'Week: ' +  topic.week} "></td>
+                <td th:text="${topic.name}"></td>
+                <td th:text="${topic.difficulty}"></td>
+                <td class="options">
+                    <a th:href="@{/courses/{courseID}/subjects/{subjectID}/edit/{topicID} (courseID=${course.ID},
+                     subjectID=${subject.ID}, topicID=${topic.ID})}">Edit a topic</a>
+                    <a th:href="@{/courses/{courseID}/subjects/{subjectID}/delete/{topicID} (courseID=${course.ID},
+                     subjectID=${subject.ID}, topicID=${topic.ID})}">Delete a topic</a>
+                </td>
+            </tr>
+        </table>
+    </section>
+    <section>
+        <!--The available option buttons from which a person can choose-->
+        <aside>
+            <div class="content">
+                <h3>
+                    <a th:href="@{/courses/{courseID}/subjects/{subjectID}/add (courseID=${course.ID},
+                     subjectID=${subject.ID})}">Add a topic</a></h3>
+                <p>When you click the link above, you will be able to <strong>add</strong> a new topic into the chosen
+                subject!</p>
+            </div>
+        </aside>
+    </section>
+    <footer th:insert="fragments/fragments.html :: footer"></footer>
+</div>
+</body>
+</html>

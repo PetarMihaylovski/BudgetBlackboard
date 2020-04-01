@@ -1,59 +1,164 @@
 package nl.saxion.budgetblackboard.dataProvider;
 
-import nl.saxion.budgetblackboard.models.Course;
-import nl.saxion.budgetblackboard.models.Subject;
-import nl.saxion.budgetblackboard.models.Topic;
-import nl.saxion.budgetblackboard.users.Person;
-import org.springframework.stereotype.Service;
+import nl.saxion.budgetblackboard.models.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-@Service
 public class DataProvider {
-
-	private ArrayList<Person> users;
+	private static DataProvider dataProvider;
+	private ArrayList<User> users;
 	private ArrayList<Course> courses;
-	private HashMap<Subject, ArrayList<Topic>> subjectWithTopics;
 
-	public DataProvider() {
+	private DataProvider() {
 		this.users = new ArrayList<>();
 		this.courses = new ArrayList<>();
-		this.subjectWithTopics = new HashMap<>();
 		init();
 	}
 
-	private void init(){
-		//TODO: init method. fill all the dummy data here.
+	public static DataProvider getInstance() {
+		if (dataProvider == null) {
+			dataProvider = new DataProvider();
+		}
+		return dataProvider;
 	}
 
-	public ArrayList<Person> getUsers() {
+	private void init() {
+		User pepi = new User("pepi@email.com", "123");
+		addUser(pepi);
+		User ivo = new User("ivo@gmail.com", "111");
+		addUser(ivo);
+		Course ict = new Course("ICT", 5, 48, 4);
+		Course ta = new Course("Tourism management", 2, 51, 4);
+		this.courses.add(ict);
+		this.courses.add(ta);
+		Subject databases = new Subject("Databases", 4,4,8);
+		ict.addSubject(databases);
+		databases.addTopic(new Topic("Introduction", 1, 1));
+		databases.addTopic(new Topic("Aggregation", 2,2));
+		Subject networkServices = new Subject("Network services", 3,3,8);
+		ict.addSubject(networkServices);
+		networkServices.addTopic(new Topic("Spring Boot 1", 2,1));
+		networkServices.addTopic(new Topic("Spring Boot 2", 1,2));
+		Subject testing = new Subject("Testing", 4,4,8);
+		ict.addSubject(testing);
+		testing.addTopic(new Topic("Getting requirements: part 1", 4,1));
+		testing.addTopic(new Topic("Getting requirements: part 2", 4,2));
+		Subject management = new Subject("Management", 3,3,8);
+		ta.addSubject(management);
+		management.addTopic(new Topic("What is management", 5,1));
+		management.addTopic(new Topic("Managing people", 2,2));
+		Subject marketing = new Subject("Marketing", 2,5,8);
+		ta.addSubject(marketing);
+		marketing.addTopic(new Topic("What is marketing", 3,1));
+		marketing.addTopic(new Topic("Stocks", 2,2));
+	}
+
+	public ArrayList<User> getUsers() {
 		return new ArrayList<>(this.users);
+	}
+
+	public void addUser(User user) {
+		if (!this.users.contains(user)) {
+			this.users.add(user);
+		}
 	}
 
 	public ArrayList<Course> getCourses() {
 		return new ArrayList<>(this.courses);
 	}
 
-	public HashMap<Subject, ArrayList<Topic>> getSubjectWithTopics() {
-		return new HashMap<>(this.subjectWithTopics);
-	}
-
-	public void addUser(Person user) {
-		if (!this.users.contains(user)) {
-			this.users.add(user);
-		}
-	}
-
-	public void addCours(Course course) {
+	public void addCourse(Course course) {
 		if (!this.courses.contains(course)) {
 			this.courses.add(course);
 		}
 	}
 
-	//TODO: not tested, might give an error.
-	public void addTopic(Subject key, Topic topic) {
-		ArrayList<Topic> currTopics = this.subjectWithTopics.get(key);
-		currTopics.add(topic);
+	public Course findCourseByID(int ID) {
+		for (Course course : this.courses) {
+			if (course.getID() == ID) {
+				return course;
+			}
+		}
+		return null;
+	}
+
+	public Subject findSubjectByID(int courseID, int subjectID) {
+		Course course = findCourseByID(courseID);
+		for (Subject subject : course.getSubjects()) {
+			if (subject.getID() == subjectID) {
+				return subject;
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<Subject> updateSubject(Course course, Subject uneditedSubject, Subject editedSubject) {
+		ArrayList<Subject> subjectsInCourse = course.getSubjects();
+		int index = subjectsInCourse.indexOf(uneditedSubject);
+		editedSubject.setTopics(uneditedSubject.getTopics());
+		editedSubject.setID(uneditedSubject.getID());
+		subjectsInCourse.set(index, editedSubject);
+		return subjectsInCourse;
+	}
+
+	public void deleteCourse(int courseID) {
+		Course course = findCourseByID(courseID);
+		this.courses.remove(course);
+	}
+
+	public ArrayList<Subject> deleteSubjectInCourse(int courseID, int subjectID){
+		Course currentCourse = findCourseByID(courseID);
+		ArrayList<Subject> subjects = currentCourse.getSubjects();
+		Subject deletedSubject = findSubjectByID(courseID, subjectID);
+		subjects.remove(deletedSubject);
+		return subjects;
+	}
+
+	public void updateCourse(Course editedCourse, int ID) {
+		Course uneditedCourse = findCourseByID(ID);
+		int index = this.courses.indexOf(uneditedCourse);
+		editedCourse.setID(ID);
+		editedCourse.setSubjects(uneditedCourse.getSubjects());
+		this.courses.set(index, editedCourse);
+	}
+
+	public Topic findTopicByID(int courseID, int subjectID, int topicID){
+		Subject subject = findSubjectByID(courseID, subjectID);
+		for (Topic topic :subject.getTopics()) {
+			if (topic.getID() == topicID){
+				return topic;
+			}
+		}
+		return null;
+	}
+
+	public Subject findSubjectByTopicName(String topicName){
+		for (Course course : this.courses) {
+			for (Subject subject : course.getSubjects()) {
+				for (Topic topic : subject.getTopics()) {
+					if (topic.getName().toLowerCase().equals(topicName.toLowerCase())){
+						return subject;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<Topic> updateTopic(int courseID, int subjectID, Topic uneditedTopic, Topic editedTopic){
+		Subject currentSubject = findSubjectByID(courseID, subjectID);
+		ArrayList<Topic> topics = currentSubject.getTopics();
+		int index = currentSubject.getTopics().indexOf(uneditedTopic);
+		editedTopic.setID(uneditedTopic.getID());
+		topics.set(index, editedTopic);
+		return topics;
+	}
+
+	public ArrayList<Topic> deleteTopic(int courseID, int subjectID, int topicID) {
+		Subject currentSubject = findSubjectByID(courseID, subjectID);
+		Topic currentTopic = findTopicByID(courseID, subjectID, topicID);
+		ArrayList<Topic> topics = currentSubject.getTopics();
+		topics.remove(currentTopic);
+		return topics;
 	}
 }

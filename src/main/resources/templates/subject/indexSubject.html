@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Subjects</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}" type="text/css">
+</head>
+<body>
+<div id="page">
+    <header th:insert="fragments/fragments.html :: header"></header>
+
+    <section class="main">
+        <!--The main table with all available courses-->
+        <table>
+            <tr>
+                <th>Subject name</th>
+                <th>Difficulty</th>
+                <th>Credits</th>
+                <th>Duration (in weeks)</th>
+                <th>Options</th>
+            </tr>
+            <tr th:each="subject :${subjects}">
+                <td th:text="${subject.name}"></td>
+                <td th:text="${subject.difficulty}"></td>
+                <td th:text="${subject.credits}"></td>
+                <td th:text="${subject.duration}"></td>
+                <td class="options">
+                    <a th:href="@{/courses/{courseID}/subjects/edit/{ID} (courseID=${course.ID}, ID=${subject.ID})}">Edit
+                        a subject</a>
+                    <a th:href="@{/courses/{courseID}/subjects/{subjectID} (courseID=${course.ID},subjectID=${subject.ID})}">View
+                        topics</a>
+                    <a th:href="@{/courses/{courseID}/subjects/delete/{ID} (courseID=${course.ID}, ID=${subject.ID})}">Delete
+                        a subject</a>
+                </td>
+            </tr>
+        </table>
+    </section>
+    <section class="main">
+        <!--The available option buttons from which a person can choose-->
+        <aside>
+            <div class="content">
+                <h3><a th:href="@{/courses/{courseID}/subjects/add (courseID=${course.ID})}">Add a subject</a></h3>
+                <p>When you click the link above, you will be able to <strong>add</strong> a new subject to the already
+                    existing subjects in that course!</p>
+            </div>
+        </aside>
+    </section>
+
+    <section class="main">
+        <div class="content">
+            <aside>
+                <form th:action="@{/courses/{courseID}/subjects/search (courseID=${course.ID})}" method="get">
+                    <input type="text" placeholder="Search topic name" name="topicName">
+                    <button type="submit">Search</button>
+                </form>
+                <p> Now introducing the new <strong>EASY SEARCH ALGORITHM</strong>. If you do not remember the subject,
+                    in
+                    which
+                    the specific topic is just write the topic's name and the subject will appear!</p>
+            </aside>
+        </div>
+
+        <div th:if="${errorMessage}">
+            <h3 th:text="${errorMessage}">Error message</h3>
+        </div>
+    </section>
+    <footer th:insert="fragments/fragments.html :: footer"></footer>
+</div>
+
+</body>
+</html>

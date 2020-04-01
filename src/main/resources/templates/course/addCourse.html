@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add course</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}" type="text/css">
+
+</head>
+<body>
+<div>
+    <header th:insert="fragments/fragments.html :: header"></header>
+
+    <form class="indexForm" th:action="@{/courses/add}" method="post">
+        Course name:<br>
+        <label>
+            <input class="input" type="text" name="name" placeholder="Name">
+        </label>
+        <br>
+        Difficulty:<br>
+        <label>
+            <input class="input" type="text" name="difficulty" placeholder="Course difficulty">
+        </label>
+        <br>
+        Minimum credits to pass:<br>
+        <label>
+            <input class="input" type="number" name="minCreditsToPass" placeholder="Minimum ETCS to pass">
+        </label>
+        <br>
+        Duration:<br>
+        <label>
+            <input class="input" type="number" name="duration" placeholder="The duration of the course">
+        </label>
+        <br>
+        <input type="submit" value="Add course!">
+    </form>
+    <footer th:insert="fragments/fragments.html :: footer"></footer>
+</div>
+
+
+</body>
+</html>
